@@ -28,6 +28,7 @@ class App extends Component {
       <div className="App">
         <p> Hiii </p>
         <button >Show Person</button>
+      
         {this.state.persons.map((peron)=>{
 
           return <Person name={peron.name}/>

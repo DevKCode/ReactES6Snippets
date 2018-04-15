@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Person from "./Person/Person";
+
+import Persons from "./components/Persons/Persons";
 
 import "./App.css";
 
@@ -30,13 +31,13 @@ class App extends Component {
     this.setState({ persons: getPersonList });
   };
 
-   personTextChanged = (index) => {
+  personTextChanged = index => {
     console.log("hi" + index);
-    let clikedData = {...this.state.persons[index]};
+    let clikedData = { ...this.state.persons[index] };
     console.log(clikedData.name);
     const copyofPerson = this.state.persons;
     copyofPerson[index].name = "React";
-    this.setState({persons:copyofPerson});
+    this.setState({ persons: copyofPerson });
   };
 
   render() {
@@ -44,17 +45,11 @@ class App extends Component {
       <div className="App">
         <p> Hiii </p>
         <button>Show Person</button>
-        {this.state.persons.map((peron, index) => {
-          return (
-            <Person
-              click={() => this.deletePersonHandler(index)}
-              name={peron.name}
-              age={peron.age}
-              key={peron.id}
-              changed={() => this.personTextChanged(index)}
-            />
-          );
-        })}
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.personTextChanged}
+        />
       </div>
     );
   }
