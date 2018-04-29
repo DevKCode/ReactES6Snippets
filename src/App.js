@@ -5,14 +5,24 @@ import Persons from "./components/Persons/Persons";
 import "./App.css";
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 1, name: "Max", age: 28 },
-      { id: 2, name: "Manu", age: 29 },
-      { id: 3, name: "Step", age: 25 }
-    ],
-    showPerson: false
-  };
+  constructor(props) {
+    super(props);
+
+    console.log("APP.JS ", props);
+    this.state = {
+      persons: [
+        { id: 1, name: "Max", age: 28 },
+        { id: 2, name: "Manu", age: 29 },
+        { id: 3, name: "Step", age: 25 }
+      ],
+      showPerson: false,
+      noOfClicks:0
+    };
+
+  }
+  componentWillMount() {
+    console.log("compwilmout :", ...this.state.persons);
+  }
 
   nameChangeHandler = event => {
     this.setState({
@@ -37,10 +47,18 @@ class App extends Component {
     console.log(clikedData.name);
     const copyofPerson = this.state.persons;
     copyofPerson[index].name = "React";
-    this.setState({ persons: copyofPerson });
+    this.setState((prevState,props)=>{
+      return{
+      
+        persons:copyofPerson,
+        noOfClicks: prevState.noOfClicks + 1
+      }
+    });
+    
   };
 
   render() {
+    
     return (
       <div className="App">
         <p> Hiii </p>
